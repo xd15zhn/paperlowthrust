@@ -1,0 +1,79 @@
+\documentclass{ctacn}
+\usepackage{hhline}
+\usepackage{threeparttable}
+\usepackage{hyperref}
+\usepackage{subfigure}
+
+\newcommand{\zhnauthora}{张航宁}
+\newcommand{\zhnauthorb}{}
+\newcommand{\zhnauthorc}{}
+\newcommand{\zhncntitle}{小推力地火转移轨道设计与优化}
+\newcommand{\zhnentitle}{(Undetermined)Precision of hybrid simulations in modeling numerical solvers}
+\newcommand{\zhncnabstract}{
+    任务目标：固定转移时间的燃耗最优转移。
+    输出结果：转移轨道、推力曲线、开关函数。
+    提交形式：pdf报告+latex程序压缩包+c++程序压缩包+exe仿真展示软件}
+\newcommand{\zhncnkeyword}{小推力;地火转移轨道}
+\newcommand{\zhnenabstract}{None.}
+\newcommand{\zhnenkeyword}{None}
+
+\begin{document}
+
+%%%%%%%
+\cndoi{}
+\doi{\zihao{-5}10.13195/j.kzyjc.2019.0000}
+\paperdate{2018-xx-xx}{2019-xx-xx}%接收日期，修回日期
+\osid{}
+\setcounter{page}{1}
+
+%%%%%%%%%%
+%%%%%%%输入页眉显示的题目
+%%%%%%%%%%%%
+\runheading{\zhnauthora~等: \zhncntitle}%页眉设置,填写第一作者及论文题目
+\xiangmujijin{本文得到国家重点研发计划(批准号:2018YFA0703800), 空间智能控制技术重点实验室基金资助(编号:ZDSYS-2018-04), 和国家自然科学基金(批准号:U20B2054)项目资助。}%项目基金  为空会自动取消显示
+\authorcor{E-mail: yz37zhn@163.com.}%通讯作者邮箱,新投稿不修改
+\cntitle{\zhncntitle}  % 输入中文标题
+\entitle{\zhnentitle}
+
+
+%                  新投稿不要修改下面的姓名及单位
+%%%中文作者和单位，\dag代表通信作者，“作者一”代表3个字的名，“作者”代表2个字的名
+\cnauthor{\zhnauthora\makebox{$^{1\dag}$}}  %新投稿不修改
+{(北京控制工程研究所,北京100094)}  %%省会城市无需加省%%新投稿不要修改
+
+%%%中文摘要
+\cnabstract{\zhncnabstract}
+
+%%%中文关键词
+\cnkeyword{\zhncnkeyword}
+
+%%%分类号、标识码
+\clc{}  % 中文分类号，请作者自行查找并填写
+\wenxianbiaoshi{A}  % 文献标志码
+
+\citation{\zhnauthora. \zhncntitle\hspace{0pt}[J].~期刊名称,~xxxx,~xx(x):~1-xxxx.}
+
+%%%%%%%              新投稿不要修改下面的英文名及单位
+\enauthor{Hangning Zhang\makebox{$^{1\dag}$}}{
+(1. China Academy of Space Technology，Beijing~100094，China)}
+\enabstract{\zhnenabstract}
+\enkeyword{\zhnenkeyword}
+\maketitle
+
+\begin{multicols}{2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 正文
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{sectionIntro.tex}
+\input{sectionFormula.tex}
+\input{sectionModeling.tex}
+\input{sectionRealsim.tex}
+\input{sectionSimulation.tex}
+\input{sectionConclusion.tex}
+
+\bibliographystyle{stylebib}
+\bibliography{reference}
+
+\end{multicols}
+\end{document}
