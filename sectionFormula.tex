@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Form
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{基本公式推导}
+\section{基本公式}
 下面推列举一些需要用到的公式定理。
 
 % ////////////////////////////////////////
@@ -27,5 +27,19 @@
         \theta =& L-\arctan \left(\frac{g}{f}\right)
     \end{aligned} \label{eqFormEquinoctial2}
 \end{align}
-式\eqref{eqFormEquinoctial1}\eqref{eqFormEquinoctial2}分别表示。
+式\eqref{eqFormEquinoctial1}\eqref{eqFormEquinoctial2}分别表示
+开普勒转改进春分点和改进春分点转开普勒轨道根数。
+
+% ////////////////////////////////////////////////////////////////
+\subsection{轨道六根数和位置速度向量}
+为了能计算给定时刻地球和火星的位置，
+需要根据平近点角计算真近点角。
+平近点角$M$到真近点角$f$之间没有解析解，
+需要使用泰勒展开的方法，
+具体公式如下\cite{msmart1977}
+\begin{align*}
+    f =& M+\left(2e-\frac{1}{4}e^3\right)\sin{M}
+    + {\frac{5}{4}}e^2\sin{2M} \\
+    &+ {\frac{13}{12}}e^3\sin{3M}+O(e^4)
+\end{align*}
 
