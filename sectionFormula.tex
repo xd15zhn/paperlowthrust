@@ -32,13 +32,43 @@
 
 % ////////////////////////////////////////////////////////////////
 \subsection{轨道六根数和位置速度向量}
-为了能计算给定时刻地球和火星的位置，
-需要根据平近点角计算真近点角。
-平近点角$M$到真近点角$f$之间没有解析解，
+给定一个轨道物体的轨道六要素后，
+即可计算出该物体相对于中心引力源的位置和速度向量，
+换算关系为
+\begin{align}
+    R =& \left[\begin{matrix}
+        c_{\Omega} c_{\omega}-s_{\Omega} c_{i} s_{\omega} & -c_{\Omega} s_{\omega}-s_{\Omega} c_{i} c_{\omega} & s_{\Omega} s_{i} \\
+        s_{\Omega} c_{\omega}+c_{\Omega} c_{i} s_{\omega} & -s_{\Omega} s_{\omega}+c_{\Omega} c_{i} c_{\omega} & -c_{\Omega} s_{i} \\
+        s_{i} s_{\omega} & s_{i} c_{\omega} & c_{i}
+    \end{matrix}\right] \notag\\
+    \vec{r} =& R\left[\begin{matrix}
+        \frac{a(1-e^2)}{1+e\cos\theta}\cos\theta \\ \frac{a(1-e^2)}{1+e\cos\theta}\sin\theta \\ 0
+    \end{matrix}\right] \notag\\
+    \vec{v} =& R\left[\begin{matrix}
+        -\sqrt{\frac{\mu}{a(1-e^2)}}\sin\theta \\ \sqrt{\frac{\mu}{a(1-e^2)}}(e+\cos\theta) \\ 0
+    \end{matrix}\right] \label{eqFormEle2RV}\\
+\end{align}
+其中$\theta$为真近点角。
+若已知初始时刻的轨道六要素，
+求给定时刻的位置速度向量的步骤为
+\begin{enumerate}[label={(\arabic*)}]\setlength{\itemsep}{-5pt}
+    \item 根据轨道六要素求出平均角速度和初始平近点角；
+    \item 根据初始平近点角、平均角速度、给定时刻求出给定时刻的平近点角；
+    \item 由平近点角计算真近点角；
+    \item 将给定时刻的真近点角代入式\eqref{eqFormEle2RV}计算位置速度向量；
+\end{enumerate}
+上述步骤需要平近点角和真近点角之间的换算。
+由真近点角计算平近点角公式为
+\begin{align*}
+    E =& 2\arctan\left(\sqrt{\frac{1-e}{1+e}}\tan\frac{\theta}{2}\right) \\
+    M =& E - e\sin{E}
+\end{align*}
+其中$E$为偏近点角，且与真近点角位于同一象限。
+由平近点角$M$计算真近点角$\theta$没有解析解，
 需要使用泰勒展开的方法，
 具体公式如下\cite{msmart1977}
 \begin{align*}
-    f =& M+\left(2e-\frac{1}{4}e^3\right)\sin{M}
+    \theta =& M+\left(2e-\frac{1}{4}e^3\right)\sin{M}
     + {\frac{5}{4}}e^2\sin{2M} \\
     &+ {\frac{13}{12}}e^3\sin{3M}+O(e^4)
 \end{align*}
