@@ -28,14 +28,6 @@
 即$T_f=19600*400=7.84\times10^6$秒，约90天。
 为统一单位，将长度单位全部换算成km，
 则推力为$F=10^{-3}$kN。
-另外考虑单位换算，
-燃料消耗速度$d_m$和推力$F$的换算关系为
-\begin{align*}
-    &\bar{d}_m\left[\frac{\text{kg}}{10^{-4}\text{s}}\right]
-    = 10^4d_m\left[\frac{\text{kg}}{\text{s}}\right] \\
-    &\bar{F}\left[\frac{\text{kg}\cdot(10^{-6}\text{km})}{(10^{-4}\text{s})^2}\right]
-    = 10^2F\left[\frac{\text{kg}\cdot\text{km}}{\text{s}^2}\right] \\
-\end{align*}
 
 % ////////////////////////////////////////
 \subsection{建模}
@@ -52,12 +44,12 @@
 其中
 $\phi$和$\theta$分别为发动机推力向量的俯仰角和方位角，
 $\epsilon(t)=0$或$1$表示发动机开机或关机。
-建立探测器器被控对象模型的模块框图如图\ref{figSimPlant}所示。
+建立探测器被控对象模型的模块框图如图\ref{figSimPlant}所示。
 \begin{center}
 	\includegraphics[scale=0.8]{plant.pdf}  \\
 	\figcaption{火星探测器被控对象模型的模块框图}\label{figSimPlant}
 \end{center}
-其中$K_m=-\frac{\bar{d}_m}{F}$。
+其中$K_m=-\frac{\bar{d}_m}{\bar{F}}$。
 
 % ////////////////////////////////////////
 \subsection{仿真调试}
@@ -72,16 +64,16 @@ $\epsilon(t)=0$或$1$表示发动机开机或关机。
 	\figcaption{地球和火星的半个公转周期轨道俯视图}\label{figSimDebug1}
 \end{center}
 地球和火星的公转周期分别按365天和687天计算，
-半个公转周期分别为$1577$和$2968$仿真器秒。
+半个公转周期分别约为$1577$和$2968$仿真器秒。
 1仿真器秒等于$1000$仿真步长，
 1仿真步长等于实际时间10秒。
 仿真器坐标下的出发点位置和速度向量分别为
 \[[\begin{matrix}
     -113.102 & 101.033 & 0.00219
-\end{matrix}]\]
+\end{matrix}]^\text{T}\]
 \[[\begin{matrix}
     -0.19353 & -0.22118 & -4.517067e-06
-\end{matrix}]\]
+\end{matrix}]^\text{T}\]
 结果基本正确。
 
 \noindent\textbf{燃料消耗}\par
@@ -92,3 +84,15 @@ $10^5$个步长对应$10^6$秒，
 结果正确。
 图\ref{figSimDebug1}中的绿色轨迹为
 发动机推力俯仰角为0，方位角为$-1.57$时持续工作$10^5$个步长的结果。
+
+% ////////////////////////////////////////
+\subsection{结果展示}
+使用差分进化算法优化结果如图\ref{figSimAns1}所示，
+对应的损失函数为$e=352.849$。
+\begin{center}
+	\includegraphics[scale=0.2]{simans1.png}  \\
+	\figcaption{差分进化算法优化结果}\label{figSimAns1}
+\end{center}
+因为优化算法使用的时间单位是$10^6$秒，
+是图\ref{figSimDebug1}中的100倍，
+所以图\ref{figSimAns1}中地球和火星的轨道画了50圈。
