@@ -87,12 +87,24 @@ $10^5$个步长对应$10^6$秒，
 
 % ////////////////////////////////////////
 \subsection{结果展示}
-使用差分进化算法优化结果如图\ref{figSimAns1}所示，
+使用差分进化算法优化结果如图\ref{figSimAns1}所示。
+两图分别为接近俯视图和接近侧视图。
 对应的损失函数为$e=352.849$。
 \begin{center}
 	\includegraphics[scale=0.2]{simans1.png}  \\
+	\includegraphics[scale=0.2]{simans2.png}  \\
 	\figcaption{差分进化算法优化结果}\label{figSimAns1}
 \end{center}
 因为优化算法使用的时间单位是$10^6$秒，
 是图\ref{figSimDebug1}中的100倍，
 所以图\ref{figSimAns1}中地球和火星的轨道画了50圈。
+
+使用模式搜索法优化结果如图\ref{figSimAns2}所示。
+此时将损失函数中燃料消耗的比重由$10^{-2}$改为$10^{-3}$，
+对应的优化后的损失函数为$e=78.870$。
+\begin{center}
+	\includegraphics[scale=0.2]{simans3.png}  \\
+	\includegraphics[scale=0.2]{simans4.png}  \\
+	\figcaption{模式搜索法优化结果}\label{figSimAns2}
+\end{center}
+
