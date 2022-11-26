@@ -33,14 +33,14 @@
 \subsection{建模}
 假设探测器在转移轨道上不受地球和火星引力影响。
 考虑燃料消耗的火星探测器动力学方程为
-\begin{align*}
+\begin{align}
     &\ddot{\vec{r}} = -\frac{\mu_s}{||\vec{r}||^3}\vec{r}
     + \frac{10^{-3}}{m(t)}\epsilon(t)
     \left[\begin{matrix}
         \cos\phi\cos\theta \\ \cos\phi\sin\theta \\ \sin\phi
-    \end{matrix}\right] \\
-    &\dot{m}(t) = -\frac{1}{19600}\epsilon(t)
-\end{align*}
+    \end{matrix}\right] \label{eqSimAcc} \\
+    &\dot{m}(t) = -\frac{1}{19600}\epsilon(t) \notag
+\end{align}
 其中
 $\phi$和$\theta$分别为发动机推力向量的俯仰角和方位角，
 $\epsilon(t)=0$或$1$表示发动机开机或关机。
@@ -50,6 +50,15 @@ $\epsilon(t)=0$或$1$表示发动机开机或关机。
 	\figcaption{火星探测器被控对象模型的模块框图}\label{figSimPlant}
 \end{center}
 其中$K_m=-\frac{\bar{d}_m}{\bar{F}}$。
+$K_m\cdot F$为燃料消耗速度，作为质量积分器的输入。
+有三个输入模块，分别为
+发动机方位角$\theta$、俯仰角$\phi$、推力大小$F$，
+这三个输入是待优化的时间函数。
+函数模块$f_\mu(\vec{r})$计算引力加速度的系数
+\[f_\mu(\vec{r})=-\frac{\mu_s}{||\vec{r}||^3}\]
+输入为位置向量，输出为标量。
+函数模块$f_a$计算加速度向量，即式\eqref{eqSimAcc}，
+输入为$\theta$、$\phi$、$F$、$m$这4个标量，输出为加速度向量。
 
 % ////////////////////////////////////////
 \subsection{仿真调试}
@@ -80,16 +89,17 @@ $\epsilon(t)=0$或$1$表示发动机开机或关机。
 仿真$10^5$个步长后，
 仿真得剩余总质量为$948.98$kg。
 $10^5$个步长对应$10^6$秒，
-燃料消耗$10^6\times\frac{1}{19600}=51.02$kg，
+计算得燃料消耗$10^6\times\frac{1}{19600}=51.02$kg，
 结果正确。
 图\ref{figSimDebug1}中的绿色轨迹为
-发动机推力俯仰角为0，方位角为$-1.57$时持续工作$10^5$个步长的结果。
+发动机推力俯仰角为0，方位角为$\theta-1.57$时持续工作$10^5$个步长的结果。
 
 % ////////////////////////////////////////
 \subsection{结果展示}
 使用差分进化算法优化结果如图\ref{figSimAns1}所示。
 两图分别为接近俯视图和接近侧视图。
-对应的损失函数为$e=352.849$。
+对应的损失函数为$e=352.849$，
+总质量剩余$634.133$kg。
 \begin{center}
 	\includegraphics[scale=0.2]{simans1.png}  \\
 	\includegraphics[scale=0.2]{simans2.png}  \\
@@ -101,7 +111,8 @@ $10^5$个步长对应$10^6$秒，
 
 使用模式搜索法优化结果如图\ref{figSimAns2}所示。
 此时将损失函数中燃料消耗的比重由$10^{-2}$改为$10^{-3}$，
-对应的优化后的损失函数为$e=78.870$。
+对应的优化后的损失函数为$e=78.870$，
+总质量剩余$579.796$kg。
 \begin{center}
 	\includegraphics[scale=0.2]{simans3.png}  \\
 	\includegraphics[scale=0.2]{simans4.png}  \\
